@@ -2,7 +2,9 @@
 
 A small React component library with accessible defaults, documented in Storybook.
 
-Components: `Button`, `Card`, `Hero`, `Input`, `Modal`, `Select`, `Slider`, `Tabs`, `Toast`, `ThemeToggle`.
+Beta: version 0.1.0-beta.0. The API may still change before 1.0.
+
+Components: `Accordion`, `Button`, `Card`, `Checkbox`, `Hero`, `Input`, `Modal`, `RadioGroup`, `Select`, `Skeleton`, `Slider`, `Spinner`, `Switch`, `Tabs`, `Toast`, `ToastProvider`, `ThemeToggle`.
 
 Stack: React 19, TypeScript, Vite, Tailwind CSS v4, Storybook 10, Vitest with Testing Library.
 
@@ -72,16 +74,19 @@ Override them in your own CSS, after importing `@delebrindel/miso/theme.css`:
 - `@theme { --color-accent: #0e7490; }` sets the light values.
 - `:root[data-theme='dark'] { --color-accent: #67e8f9; }` sets the dark values.
 
-Button, Card, Hero, Input, Select, Slider, Tabs, and ThemeToggle follow the tokens. Modal and Toast still use fixed slate and blue colors, so they don't follow a custom palette yet.
+All components follow the tokens. The `Modal` backdrop is a fixed dark tint in both themes.
 
 ## Accessibility
 
 - `Input` and `Select` always render a label bound with `htmlFor`, and link hint and error text through `aria-describedby`. They use an underline-only style.
 - `Modal` uses the native `<dialog>` element, so focus is trapped and the background is inert. Escape is routed to `onClose`.
 - `Tabs` follows the WAI-ARIA tabs pattern: arrow keys, Home, and End move between enabled tabs. Disabled tabs don't respond to hover and show a `not-allowed` cursor.
-- `Toast` uses `role="alert"` for errors and `role="status"` otherwise.
+- `Toast` uses `role="alert"` for errors and `role="status"` otherwise. Toasts stay until dismissed. Set `duration` (ms) on `ToastProvider` or on one toast to auto-dismiss it.
+- `Accordion` opens one item at a time. Pass `exclusive={false}` to allow several open. Each title is a heading inside `summary`; `headingLevel` (2 to 4, default 3) sets its level.
+- `Spinner` is a `role="status"` region with a visible label (default "Loading"). The ring animates for every user. To stop it, set `animation: none` on `.miso-spinner` in your CSS.
+- `Skeleton` is decorative and hidden from assistive technology. Put `aria-busy="true"` on the container that is loading.
 - `Slider` is a labelled carousel region. ArrowLeft and ArrowRight move between slides while focus is inside it. It doesn't autoplay. Inactive slides use `hidden`, so they're removed from the accessibility tree.
-- `Card` with `href` stretches the title link over the whole card. Footer controls stay clickable.
+- `Card` with `href` stretches the title link over the whole card. Footer controls stay clickable. `headingLevel` (2 to 4, default 3) sets the title's heading level.
 - `Hero` is a `<section>` labelled by its heading, so it's exposed as a named region.
 - The Storybook a11y addon shows axe results for each story in the Accessibility panel.
 
