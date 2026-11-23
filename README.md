@@ -8,7 +8,7 @@ A small React component library with accessible defaults, documented in [Storybo
 
 Beta: version 0.1.0-beta.0. The API may still change before 1.0.
 
-Components: `Accordion`, `Button`, `Card`, `Checkbox`, `Hero`, `Input`, `Modal`, `RadioGroup`, `Select`, `Skeleton`, `Slider`, `Spinner`, `Switch`, `Tabs`, `Toast`, `ToastProvider`, `ThemeToggle`.
+Components: `Accordion`, `Button`, `Card`, `Checkbox`, `Hero`, `Input`, `Modal`, `RadioGroup`, `Select`, `Skeleton`, `Slider`, `Spinner`, `Switch`, `Tabs`, `Toast`, `ToastProvider`.
 
 Stack: React 19, TypeScript, Vite, Tailwind CSS v4, Storybook 10, Vitest with Testing Library.
 
@@ -56,7 +56,6 @@ getTheme();       // saved choice, otherwise the OS preference
 
 - `useTheme()` returns `{ theme, setTheme }` for React components and re-renders on any `setTheme` call.
 - The storage key defaults to `miso-theme`. Pass `{ storageKey }` to `setTheme`, `getTheme`, or `useTheme` to change it.
-- `ThemeToggle` is built on `useTheme`. It accepts `storageKey` and `className`.
 - To avoid a white flash on dark pages, set `data-theme` in a script in `<head>` before first paint. The starter's `index.html` shows one.
 
 ### Design tokens
@@ -96,7 +95,7 @@ All components follow the tokens. The `Modal` backdrop is a fixed dark tint in b
 
 ## Testing
 
-`npm test` runs Vitest with jsdom and Testing Library. Tests sit beside each component as `*.test.tsx`. The theme API and `ThemeToggle` have no tests.
+`npm test` runs Vitest with jsdom and Testing Library. Tests sit beside each component as `*.test.tsx`. The theme API has no tests.
 
 ## Publishing
 

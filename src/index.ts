@@ -30,7 +30,5 @@ export { Toast } from './components/Toast/Toast';
 export type { ToastProps, ToastTone } from './components/Toast/Toast';
 export { ToastProvider, useToast } from './components/Toast/ToastProvider';
 export type { ToastPosition, ToastOptions, ToastApi, ToastProviderProps } from './components/Toast/ToastProvider';
-export { ThemeToggle } from './components/ThemeToggle/ThemeToggle';
-export type { ThemeToggleProps } from './components/ThemeToggle/ThemeToggle';
 export { getTheme, setTheme, useTheme } from './theme';
 export type { ThemeName, ThemeOptions } from './theme';

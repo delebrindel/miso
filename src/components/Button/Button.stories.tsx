@@ -4,22 +4,29 @@ import { Button } from './Button';
 const meta = {
   title: 'Components/Button',
   component: Button,
-  args: { children: 'Save changes' },
-  argTypes: {
-    variant: { control: 'inline-radio', options: ['primary', 'secondary', 'ghost'] },
-    size: { control: 'inline-radio', options: ['sm', 'md'] },
-  },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {};
+const variants = ['primary', 'secondary', 'ghost'] as const;
+const sizes = ['sm', 'md'] as const;
 
-export const Secondary: Story = { args: { variant: 'secondary' } };
-
-export const Ghost: Story = { args: { variant: 'ghost' } };
-
-export const Small: Story = { args: { size: 'sm' } };
-
-export const Disabled: Story = { args: { disabled: true } };
+export const AllButtons: Story = {
+  render: () => (
+    <div className="grid gap-4">
+      {variants.map((variant) => (
+        <div key={variant} className="flex flex-wrap items-center gap-3">
+          {sizes.map((size) => (
+            <Button key={size} variant={variant} size={size}>
+              {variant} {size}
+            </Button>
+          ))}
+          <Button variant={variant} disabled>
+            {variant} disabled
+          </Button>
+        </div>
+      ))}
+    </div>
+  ),
+};

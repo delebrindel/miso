@@ -1,5 +1,5 @@
 /* Semantic tokens used by the components. Light is the default. Setting
-   <html data-theme="dark"> (ThemeToggle does this) activates the dark set below.
+   <html data-theme="dark"> activates the dark set below.
 
    To customize: override tokens in your own @theme block (light) and in a
    :root[data-theme='dark'] block (dark). Tokens are plain CSS variables, so any
