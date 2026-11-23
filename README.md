@@ -1,5 +1,9 @@
 # Miso
 
+![Miso logo](.storybook/public/logo.png)
+
+The name comes from miso, the soup: simple, a stable base that can be improved upon over time.
+
 A small React component library with accessible defaults, documented in Storybook.
 
 Beta: version 0.1.0-beta.0. The API may still change before 1.0.
