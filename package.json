@@ -2,6 +2,10 @@
   "name": "miso",
   "version": "0.1.0",
   "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./theme.css": "./src/theme.css"
+  },
   "description": "Miso: a small, accessible React component library documented in Storybook.",
   "scripts": {
     "dev": "storybook dev -p 6006",

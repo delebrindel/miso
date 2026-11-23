@@ -1,0 +1,25 @@
+/* Semantic tokens used by the components. Light is the default. Setting
+   <html data-theme="dark"> (ThemeToggle does this) activates the dark set below.
+
+   To customize: override tokens in your own @theme block (light) and in a
+   :root[data-theme='dark'] block (dark). Tokens are plain CSS variables, so any
+   override applies to every Miso component. */
+@theme {
+  --color-page: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f1f5f9;
+  --color-border: #cbd5e1;
+  --color-fg: #0f172a;
+  --color-muted: #475569;
+  --color-accent: #2563eb;
+}
+
+:root[data-theme='dark'] {
+  --color-page: #0f172a;
+  --color-surface: #1e293b;
+  --color-surface-alt: #273449;
+  --color-border: #334155;
+  --color-fg: #f1f5f9;
+  --color-muted: #94a3b8;
+  --color-accent: #60a5fa;
+}
