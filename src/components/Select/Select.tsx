@@ -22,31 +22,31 @@ export function Select({ label, options, hint, error, id, className = '', ...res
 
   return (
     <div className={`flex flex-col gap-1 ${className}`.trim()}>
-      <label htmlFor={selectId} className="text-sm font-medium text-slate-900">
+      <label htmlFor={selectId} className="text-sm font-medium text-fg">
         {label}
       </label>
       <select
         id={selectId}
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy}
-        className={`h-10 rounded-md border bg-white px-3 text-base text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-blue-600 disabled:opacity-50 ${
-          error ? 'border-red-600' : 'border-slate-300'
+        className={`h-10 border-b bg-transparent px-0 text-base text-fg focus:border-b-2 focus:outline-none disabled:opacity-50 ${
+          error ? 'border-danger' : 'border-control focus:border-accent'
         }`}
         {...rest}
       >
         {options.map((option) => (
-          <option key={option.value} value={option.value} disabled={option.disabled}>
+          <option key={option.value} value={option.value} disabled={option.disabled} className="bg-surface text-fg">
             {option.label}
           </option>
         ))}
       </select>
       {hint && !error && (
-        <p id={hintId} className="text-sm text-slate-600">
+        <p id={hintId} className="text-sm text-muted">
           {hint}
         </p>
       )}
       {error && (
-        <p id={errorId} className="text-sm text-red-700">
+        <p id={errorId} className="text-sm text-danger">
           {error}
         </p>
       )}

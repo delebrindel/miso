@@ -15,4 +15,20 @@ describe('Hero', () => {
 
     expect(screen.getByRole('link', { name: 'Contact' })).toHaveAttribute('href', '/contact');
   });
+
+  it('places media after the text by default', () => {
+    render(<Hero title="Hello" media={<img alt="Diagram" />} />);
+
+    expect(screen.getByRole('region', { name: 'Hello' }).lastElementChild).toContainElement(
+      screen.getByRole('img', { name: 'Diagram' }),
+    );
+  });
+
+  it('places media before the text when mediaPosition is start', () => {
+    render(<Hero title="Hello" media={<img alt="Diagram" />} mediaPosition="start" />);
+
+    expect(screen.getByRole('region', { name: 'Hello' }).firstElementChild).toContainElement(
+      screen.getByRole('img', { name: 'Diagram' }),
+    );
+  });
 });

@@ -15,7 +15,7 @@ const base =
 
 const variants: Record<ButtonVariant, string> = {
   primary: 'bg-fg text-surface hover:opacity-80',
-  secondary: 'border border-border bg-surface text-fg hover:bg-surface-alt',
+  secondary: 'border border-control bg-surface text-fg hover:bg-surface-alt',
   ghost: 'text-fg hover:bg-surface-alt',
 };
 

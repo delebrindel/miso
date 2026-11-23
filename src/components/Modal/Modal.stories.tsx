@@ -18,7 +18,7 @@ function ModalDemo() {
     <>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
       <Modal open={open} onClose={() => setOpen(false)} title="Delete project?">
-        <p className="text-sm text-slate-600">This removes the project and its history. This cannot be undone.</p>
+        <p className="text-sm text-muted">This removes the project and its history. This cannot be undone.</p>
         <div className="flex justify-end gap-2">
           <Button variant="secondary" onClick={() => setOpen(false)}>
             Cancel
@@ -32,4 +32,36 @@ function ModalDemo() {
 
 export const Default: Story = {
   render: () => <ModalDemo />,
+};
+
+function NestedModalDemo() {
+  const [open, setOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open dialog</Button>
+      <Modal open={open} onClose={() => setOpen(false)} title="Edit project">
+        <p className="text-sm text-muted">Changes apply to the whole project.</p>
+        <div className="flex justify-end gap-2">
+          <Button variant="secondary" onClick={() => setOpen(false)}>
+            Close
+          </Button>
+          <Button onClick={() => setConfirmOpen(true)}>Delete project</Button>
+        </div>
+        <Modal open={confirmOpen} onClose={() => setConfirmOpen(false)} title="Are you sure?">
+          <p className="text-sm text-muted">This removes the project and its history. This cannot be undone.</p>
+          <div className="flex justify-end gap-2">
+            <Button variant="secondary" onClick={() => setConfirmOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => { setConfirmOpen(false); setOpen(false); }}>Delete</Button>
+          </div>
+        </Modal>
+      </Modal>
+    </>
+  );
+}
+
+export const NestedModal: Story = {
+  render: () => <NestedModalDemo />,
 };

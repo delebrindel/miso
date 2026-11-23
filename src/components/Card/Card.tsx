@@ -10,14 +10,17 @@ export interface CardProps {
   href?: string;
   /** Controls placed at the bottom. They sit above the stretched link, so they stay clickable. */
   footer?: ReactNode;
+  /** Heading level for the title. Pick the level that fits the page outline. */
+  headingLevel?: 2 | 3 | 4;
   className?: string;
 }
 
 // When href is set, the title link is stretched over the whole card (via ::after), so the
 // card is one click target without nesting interactive elements. Footer controls are
 // raised with z-10 so they still receive clicks.
-export function Card({ title, eyebrow, description, tags, href, footer, className = '' }: CardProps) {
+export function Card({ title, eyebrow, description, tags, href, footer, headingLevel = 3, className = '' }: CardProps) {
   const titleId = useId();
+  const Heading = `h${headingLevel}` as const;
 
   return (
     <article
@@ -25,7 +28,7 @@ export function Card({ title, eyebrow, description, tags, href, footer, classNam
       className={`relative flex flex-col gap-3 rounded-lg border border-border bg-surface p-5 transition-colors hover:border-accent ${className}`.trim()}
     >
       {eyebrow && <p className="font-mono text-xs font-bold tracking-wider text-accent uppercase">{eyebrow}</p>}
-      <h3 id={titleId} className="text-lg font-semibold text-fg">
+      <Heading id={titleId} className="text-lg font-semibold text-fg">
         {href ? (
           <a
             href={href}
@@ -36,7 +39,7 @@ export function Card({ title, eyebrow, description, tags, href, footer, classNam
         ) : (
           title
         )}
-      </h3>
+      </Heading>
       {description && <div className="text-sm text-muted">{description}</div>}
       {tags && tags.length > 0 && (
         <ul aria-label="Tags" className="flex flex-wrap gap-2">
