@@ -35,7 +35,7 @@ export function Select({ label, options, hint, error, id, className = '', ...res
         {...rest}
       >
         {options.map((option) => (
-          <option key={option.value} value={option.value} disabled={option.disabled}>
+          <option key={option.value} value={option.value} disabled={option.disabled} className="bg-surface text-fg">
             {option.label}
           </option>
         ))}

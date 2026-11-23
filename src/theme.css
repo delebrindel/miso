@@ -19,7 +19,12 @@
   --color-danger-surface: #fef2f2;
 }
 
+:root {
+  color-scheme: light;
+}
+
 :root[data-theme='dark'] {
+  color-scheme: dark;
   --color-page: #0f172a;
   --color-surface: #1e293b;
   --color-surface-alt: #273449;
