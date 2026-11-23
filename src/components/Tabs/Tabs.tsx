@@ -1,4 +1,4 @@
-import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { useCallback, useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 
 export interface TabItem {
   id: string;
@@ -20,6 +20,39 @@ export function Tabs({ label, tabs, defaultTabId }: TabsProps) {
   const firstEnabled = tabs.find((tab) => !tab.disabled)?.id;
   const [selectedId, setSelectedId] = useState(defaultTabId ?? firstEnabled);
   const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+  const listRef = useRef<HTMLDivElement>(null);
+  const [edges, setEdges] = useState({ start: false, end: false });
+
+  // Fades a list edge only when tabs are hidden past it, so the affordance appears only when needed.
+  const updateEdges = useCallback(() => {
+    const list = listRef.current;
+    if (!list) return;
+    const start = list.scrollLeft > 0;
+    const end = list.scrollLeft + list.clientWidth < list.scrollWidth - 1;
+    setEdges((current) => (current.start === start && current.end === end ? current : { start, end }));
+  }, []);
+
+  useEffect(() => {
+    updateEdges();
+    window.addEventListener('resize', updateEdges);
+    return () => window.removeEventListener('resize', updateEdges);
+  }, [tabs, updateEdges]);
+
+  // A vertical wheel scrolls the tab list while it has room; native listener because React's onWheel is passive.
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+    const handleWheel = (event: WheelEvent) => {
+      if (Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
+      const maxScroll = list.scrollWidth - list.clientWidth;
+      const canScroll = event.deltaY > 0 ? list.scrollLeft < maxScroll : list.scrollLeft > 0;
+      if (!canScroll) return;
+      event.preventDefault();
+      list.scrollLeft += event.deltaY;
+    };
+    list.addEventListener('wheel', handleWheel, { passive: false });
+    return () => list.removeEventListener('wheel', handleWheel);
+  }, []);
 
   const enabledIds = tabs.filter((tab) => !tab.disabled).map((tab) => tab.id);
 
@@ -47,9 +80,19 @@ export function Tabs({ label, tabs, defaultTabId }: TabsProps) {
   const panelId = (id: string) => `${baseId}-panel-${id}`;
   const tabId = (id: string) => `${baseId}-tab-${id}`;
 
+  const fade = 32;
+  const mask = `linear-gradient(to right, ${edges.start ? 'transparent' : 'black'}, black ${edges.start ? fade : 0}px, black calc(100% - ${edges.end ? fade : 0}px), ${edges.end ? 'transparent' : 'black'})`;
+
   return (
     <div className="flex flex-col gap-4">
-      <div role="tablist" aria-label={label} className="flex gap-1 border-b border-border">
+      <div
+        ref={listRef}
+        role="tablist"
+        aria-label={label}
+        onScroll={updateEdges}
+        style={{ maskImage: mask }}
+        className="flex gap-1 overflow-x-auto pb-px shadow-[inset_0_-1px_0_var(--color-border)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
         {tabs.map((tab) => {
           const selected = tab.id === selectedId;
           return (
@@ -68,7 +111,7 @@ export function Tabs({ label, tabs, defaultTabId }: TabsProps) {
               disabled={tab.disabled}
               onClick={() => select(tab.id)}
               onKeyDown={(event) => handleKeyDown(event, tab.id)}
-              className={`-mb-px border-b-2 px-4 py-2 text-sm font-medium focus-visible:outline-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-50 ${
+              className={`-mb-px shrink-0 whitespace-nowrap border-b-2 px-4 py-2 text-sm font-medium focus-visible:outline-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-50 ${
                 selected
                   ? 'border-fg text-fg'
                   : 'border-transparent text-muted enabled:hover:text-fg'

@@ -19,3 +19,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const ManyTabs: Story = {
+  args: {
+    label: 'Reports',
+    tabs: ['Overview', 'Revenue', 'Customers', 'Retention', 'Churn', 'Pipeline', 'Forecasts', 'Exports'].map((label) => ({
+      id: label.toLowerCase(),
+      label,
+      content: <p>{label} details.</p>,
+    })),
+  },
+};

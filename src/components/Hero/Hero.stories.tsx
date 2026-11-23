@@ -24,12 +24,20 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
+const placeholderMedia = (
+  <div className="flex aspect-square items-center justify-center rounded-lg border border-border bg-surface-alt text-muted">
+    Image placeholder
+  </div>
+);
+
 export const WithMedia: Story = {
-  args: {
-    media: (
-      <div className="flex aspect-square items-center justify-center rounded-lg border border-border bg-surface-alt text-muted">
-        Image placeholder
-      </div>
-    ),
-  },
+  args: { media: placeholderMedia },
+};
+
+export const WithMediaStart: Story = {
+  args: { media: placeholderMedia, mediaPosition: 'start' },
+};
+
+export const WithMinHeight: Story = {
+  args: { media: placeholderMedia, className: 'lg:min-h-[480px]' },
 };

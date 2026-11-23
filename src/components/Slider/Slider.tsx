@@ -1,5 +1,6 @@
 import { Children, useState } from 'react';
 import type { KeyboardEvent, ReactNode } from 'react';
+import { Icon } from '../Icon/Icon';
 
 export interface SliderProps {
   /** Accessible name for the carousel, e.g. "Featured projects". */
@@ -11,7 +12,7 @@ export interface SliderProps {
 }
 
 const controlClass =
-  'inline-flex h-9 items-center justify-center rounded-md border border-border px-3 text-sm font-medium text-fg ' +
+  'inline-flex h-9 w-9 items-center justify-center rounded-md border border-control text-fg ' +
   'transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
 
 // Manual only: no autoplay, so nothing moves while someone is reading. Only the active slide
@@ -60,9 +61,9 @@ export function Slider({ label, children, defaultIndex = 0, className = '' }: Sl
       </div>
       <div className="flex items-center justify-between gap-4">
         <button type="button" className={controlClass} aria-label="Previous slide" onClick={() => go(active - 1)}>
-          ←
+          <Icon name="arrow-left" />
         </button>
-        <div role="group" aria-label="Choose slide" className="flex items-center gap-2">
+        <div role="group" aria-label="Choose slide" className="flex items-center">
           {slides.map((_, index) => (
             <button
               key={index}
@@ -70,12 +71,12 @@ export function Slider({ label, children, defaultIndex = 0, className = '' }: Sl
               aria-label={`Show slide ${index + 1}`}
               aria-current={index === active ? 'true' : undefined}
               onClick={() => go(index)}
-              className="h-2.5 w-2.5 rounded-full bg-border transition-colors hover:bg-muted aria-[current=true]:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="h-6 w-6 rounded-full bg-clip-content bg-control p-[7px] transition-colors hover:bg-muted aria-[current=true]:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             />
           ))}
         </div>
         <button type="button" className={controlClass} aria-label="Next slide" onClick={() => go(active + 1)}>
-          →
+          <Icon name="arrow-right" />
         </button>
       </div>
     </section>

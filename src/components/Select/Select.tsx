@@ -30,7 +30,7 @@ export function Select({ label, options, hint, error, id, className = '', ...res
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy}
         className={`h-10 border-b bg-transparent px-0 text-base text-fg focus:border-b-2 focus:outline-none disabled:opacity-50 ${
-          error ? 'border-red-600' : 'border-border focus:border-accent'
+          error ? 'border-danger' : 'border-control focus:border-accent'
         }`}
         {...rest}
       >
@@ -46,7 +46,7 @@ export function Select({ label, options, hint, error, id, className = '', ...res
         </p>
       )}
       {error && (
-        <p id={errorId} className="text-sm text-red-700">
+        <p id={errorId} className="text-sm text-danger">
           {error}
         </p>
       )}

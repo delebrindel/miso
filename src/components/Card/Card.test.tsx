@@ -20,4 +20,10 @@ describe('Card', () => {
 
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
   });
+
+  it('renders the title at the requested heading level', () => {
+    render(<Card title="Migration" headingLevel={2} />);
+
+    expect(screen.getByRole('heading', { level: 2, name: 'Migration' })).toBeInTheDocument();
+  });
 });
