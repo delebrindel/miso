@@ -16,20 +16,20 @@ export function Input({ label, hint, error, id, className = '', ...rest }: Input
 
   return (
     <div className={`flex flex-col gap-1 ${className}`.trim()}>
-      <label htmlFor={inputId} className="text-sm font-medium text-slate-900">
+      <label htmlFor={inputId} className="text-sm font-medium text-fg">
         {label}
       </label>
       <input
         id={inputId}
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy}
-        className={`h-10 rounded-md border px-3 text-base text-slate-900 placeholder:text-slate-400 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-blue-600 disabled:opacity-50 ${
-          error ? 'border-red-600' : 'border-slate-300'
+        className={`h-10 border-b px-0 text-base text-fg placeholder:text-muted focus:border-b-2 focus:outline-none disabled:opacity-50 ${
+          error ? 'border-red-600' : 'border-border focus:border-accent'
         }`}
         {...rest}
       />
       {hint && !error && (
-        <p id={hintId} className="text-sm text-slate-600">
+        <p id={hintId} className="text-sm text-muted">
           {hint}
         </p>
       )}

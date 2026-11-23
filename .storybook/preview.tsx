@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
 import '../src/index.css';
-import { applyTheme } from '../src/components/ThemeToggle/ThemeToggle';
+import { applyTheme } from '../src/theme';
 
 const preview: Preview = {
   parameters: {

@@ -49,7 +49,7 @@ export function Tabs({ label, tabs, defaultTabId }: TabsProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div role="tablist" aria-label={label} className="flex gap-1 border-b border-slate-200">
+      <div role="tablist" aria-label={label} className="flex gap-1 border-b border-border">
         {tabs.map((tab) => {
           const selected = tab.id === selectedId;
           return (
@@ -68,10 +68,10 @@ export function Tabs({ label, tabs, defaultTabId }: TabsProps) {
               disabled={tab.disabled}
               onClick={() => select(tab.id)}
               onKeyDown={(event) => handleKeyDown(event, tab.id)}
-              className={`-mb-px border-b-2 px-4 py-2 text-sm font-medium focus-visible:outline-2 focus-visible:outline-blue-600 disabled:opacity-50 ${
+              className={`-mb-px border-b-2 px-4 py-2 text-sm font-medium focus-visible:outline-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-50 ${
                 selected
-                  ? 'border-slate-900 text-slate-900'
-                  : 'border-transparent text-slate-600 hover:text-slate-900'
+                  ? 'border-fg text-fg'
+                  : 'border-transparent text-muted enabled:hover:text-fg'
               }`}
             >
               {tab.label}
@@ -87,7 +87,7 @@ export function Tabs({ label, tabs, defaultTabId }: TabsProps) {
           aria-labelledby={tabId(tab.id)}
           hidden={tab.id !== selectedId}
           tabIndex={0}
-          className="text-sm text-slate-700 focus-visible:outline-2 focus-visible:outline-blue-600"
+          className="text-sm text-fg focus-visible:outline-2 focus-visible:outline-accent"
         >
           {tab.content}
         </div>

@@ -17,4 +17,6 @@ export type { TabsProps, TabItem } from './components/Tabs/Tabs';
 export { Toast } from './components/Toast/Toast';
 export type { ToastProps, ToastTone } from './components/Toast/Toast';
 export { ThemeToggle } from './components/ThemeToggle/ThemeToggle';
-export type { ThemeToggleProps, ThemeName } from './components/ThemeToggle/ThemeToggle';
+export type { ThemeToggleProps } from './components/ThemeToggle/ThemeToggle';
+export { getTheme, setTheme, useTheme } from './theme';
+export type { ThemeName, ThemeOptions } from './theme';
